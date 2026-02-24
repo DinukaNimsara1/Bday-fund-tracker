@@ -1,125 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Birthday Fund Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen p-6">
-<div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-800">🎂 Birthday Fund Manager</h1>
-                <p class="text-gray-600 mt-1">Track contributions and expenses for your friend group</p>
-            </div>
-            <div class="text-right">
-                <p class="text-sm text-gray-600">Total Balance</p>
-                <p id="totalBalance" class="text-3xl font-bold text-green-600">$0.00</p>
-            </div>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen p-3 sm:p-6"
+  >
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="bg-white rounded-2xl shadow-xl p-4 sm:p-6 mb-6">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+        >
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">
+              🎂 Birthday Fund Manager
+            </h1>
+            <p class="text-gray-600 mt-1 text-sm sm:text-base">
+              Track contributions and expenses for your friend group
+            </p>
+          </div>
+          <div class="sm:text-right">
+            <p class="text-sm text-gray-600">Total Balance</p>
+            <p
+              id="totalBalance"
+              class="text-2xl sm:text-3xl font-bold text-green-600"
+            >
+              $0.00
+            </p>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- Summary Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div class="bg-white rounded-xl shadow-md p-4">
-            <p class="text-sm text-gray-600">Total Collected</p>
-            <p id="totalCollected" class="text-2xl font-bold text-green-600">$0.00</p>
+          <p class="text-sm text-gray-600">Total Collected</p>
+          <p id="totalCollected" class="text-2xl font-bold text-green-600">
+            $0.00
+          </p>
         </div>
         <div class="bg-white rounded-xl shadow-md p-4">
-            <p class="text-sm text-gray-600">Total Spent</p>
-            <p id="totalSpent" class="text-2xl font-bold text-red-600">$0.00</p>
+          <p class="text-sm text-gray-600">Total Spent</p>
+          <p id="totalSpent" class="text-2xl font-bold text-red-600">$0.00</p>
         </div>
         <div class="bg-white rounded-xl shadow-md p-4">
-            <p class="text-sm text-gray-600">Monthly Amount</p>
-            <input type="number" id="monthlyAmount" value="20" class="text-2xl font-bold text-purple-600 border-b-2 border-gray-300 focus:border-purple-600 outline-none w-full">
+          <p class="text-sm text-gray-600">Monthly Amount</p>
+          <input
+            type="number"
+            id="monthlyAmount"
+            value="20"
+            class="text-2xl font-bold text-purple-600 border-b-2 border-gray-300 focus:border-purple-600 outline-none w-full"
+          />
         </div>
         <div class="bg-white rounded-xl shadow-md p-4">
-            <p class="text-sm text-gray-600">Members</p>
-            <p id="memberCount" class="text-2xl font-bold text-blue-600">0</p>
+          <p class="text-sm text-gray-600">Members</p>
+          <p id="memberCount" class="text-2xl font-bold text-blue-600">0</p>
         </div>
-    </div>
+      </div>
 
-    <!-- Tabs -->
-    <div class="bg-white rounded-xl shadow-md mb-6">
-        <div class="flex border-b">
-            <button onclick="showTab('overview')" id="tab-overview" class="flex-1 py-3 px-6 font-semibold border-b-2 border-purple-600 text-purple-600">
-                Payment Overview
-            </button>
-            <button onclick="showTab('birthdays')" id="tab-birthdays" class="flex-1 py-3 px-6 font-semibold text-gray-600 hover:text-gray-800">
-                Birthday Calendar
-            </button>
-            <button onclick="showTab('expenses')" id="tab-expenses" class="flex-1 py-3 px-6 font-semibold text-gray-600 hover:text-gray-800">
-                Expenses
-            </button>
-            <button onclick="showTab('members')" id="tab-members" class="flex-1 py-3 px-6 font-semibold text-gray-600 hover:text-gray-800">
-                Manage Members
-            </button>
+      <!-- Tabs -->
+      <div class="bg-white rounded-xl shadow-md mb-6">
+        <div class="flex flex-wrap border-b">
+          <button
+            onclick="showTab('overview')"
+            id="tab-overview"
+            class="flex-1 min-w-[6rem] py-2 px-2 sm:py-3 sm:px-6 text-sm sm:text-base font-semibold border-b-2 border-purple-600 text-purple-600 text-center"
+          >
+            <span class="hidden sm:inline">Payment </span>Overview
+          </button>
+          <button
+            onclick="showTab('birthdays')"
+            id="tab-birthdays"
+            class="flex-1 min-w-[6rem] py-2 px-2 sm:py-3 sm:px-6 text-sm sm:text-base font-semibold text-gray-600 hover:text-gray-800 text-center"
+          >
+            <span class="hidden sm:inline">Birthday </span>Calendar
+          </button>
+          <button
+            onclick="showTab('expenses')"
+            id="tab-expenses"
+            class="flex-1 min-w-[6rem] py-2 px-2 sm:py-3 sm:px-6 text-sm sm:text-base font-semibold text-gray-600 hover:text-gray-800 text-center"
+          >
+            Expenses
+          </button>
+          <button
+            onclick="showTab('members')"
+            id="tab-members"
+            class="flex-1 min-w-[6rem] py-2 px-2 sm:py-3 sm:px-6 text-sm sm:text-base font-semibold text-gray-600 hover:text-gray-800 text-center"
+          >
+            <span class="hidden sm:inline">Manage </span>Members
+          </button>
         </div>
-    </div>
+      </div>
 
-    <!-- Payment Overview Tab -->
-    <div id="content-overview" class="bg-white rounded-xl shadow-md p-6">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Payment Overview - All Months</h2>
-            <div class="flex gap-2">
-                <button onclick="exportData()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                    💾 Export Data
-                </button>
-                <label class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 cursor-pointer">
-                    📂 Import Data
-                    <input type="file" accept=".json" onchange="importData(event)" class="hidden">
-                </label>
-            </div>
+      <!-- Payment Overview Tab -->
+      <div id="content-overview" class="bg-white rounded-xl shadow-md p-6">
+        <div
+          class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4"
+        >
+          <h2 class="text-xl font-bold">Payment Overview - All Months</h2>
+          <div class="flex gap-2">
+            <button
+              onclick="exportData()"
+              class="flex-1 sm:flex-none px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+            >
+              💾 Export
+            </button>
+            <label
+              class="flex-1 sm:flex-none px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 cursor-pointer text-sm text-center"
+            >
+              📂 Import
+              <input
+                type="file"
+                accept=".json"
+                onchange="importData(event)"
+                class="hidden"
+              />
+            </label>
+          </div>
         </div>
         <div class="table-container border rounded-lg">
-            <table class="w-full" id="paymentTable">
-                <thead class="sticky-header border-b-2">
-                <tr>
-                    <th class="sticky-col p-3 text-left font-semibold border-r">Member</th>
-                </tr>
-                </thead>
-                <tbody id="paymentTableBody">
-                </tbody>
-            </table>
+          <table class="w-full" id="paymentTable">
+            <thead class="sticky-header border-b-2">
+              <tr>
+                <th class="sticky-col p-3 text-left font-semibold border-r">
+                  Member
+                </th>
+              </tr>
+            </thead>
+            <tbody id="paymentTableBody"></tbody>
+          </table>
         </div>
-    </div>
+      </div>
 
-    <!-- Birthday Calendar Tab -->
-    <div id="content-birthdays" class="bg-white rounded-xl shadow-md p-6 hidden">
+      <!-- Birthday Calendar Tab -->
+      <div
+        id="content-birthdays"
+        class="bg-white rounded-xl shadow-md p-6 hidden"
+      >
         <h2 class="text-xl font-bold mb-4">Birthday Calendar</h2>
-        <div id="birthdayList" class="space-y-3">
-        </div>
-    </div>
+        <div id="birthdayList" class="space-y-3"></div>
+      </div>
 
-    <!-- Expenses Tab -->
-    <div id="content-expenses" class="bg-white rounded-xl shadow-md p-6 hidden">
+      <!-- Expenses Tab -->
+      <div
+        id="content-expenses"
+        class="bg-white rounded-xl shadow-md p-6 hidden"
+      >
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Expenses</h2>
-            <button onclick="addExpense()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-                ➕ Add Expense
-            </button>
+          <h2 class="text-xl font-bold">Expenses</h2>
+          <button
+            onclick="addExpense()"
+            class="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
+          >
+            ➕ Add Expense
+          </button>
         </div>
-        <div id="expenseList" class="space-y-3">
-        </div>
-    </div>
+        <div id="expenseList" class="space-y-3"></div>
+      </div>
 
-    <!-- Manage Members Tab -->
-    <div id="content-members" class="bg-white rounded-xl shadow-md p-6 hidden">
+      <!-- Manage Members Tab -->
+      <div
+        id="content-members"
+        class="bg-white rounded-xl shadow-md p-6 hidden"
+      >
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Manage Members</h2>
-            <button onclick="addMember()" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
-                ➕ Add Member
-            </button>
+          <h2 class="text-xl font-bold">Manage Members</h2>
+          <button
+            onclick="addMember()"
+            class="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm"
+          >
+            ➕ Add Member
+          </button>
         </div>
-        <div id="memberList" class="space-y-3">
-        </div>
+        <div id="memberList" class="space-y-3"></div>
+      </div>
     </div>
-</div>
 
-<script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
